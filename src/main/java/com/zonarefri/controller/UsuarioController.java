@@ -1,8 +1,10 @@
 package com.zonarefri.controller;
 
-import com.zonarefri.model.Usuario;
+import com.zonarefri.dto.UsuarioRegistroDTO;
+import com.zonarefri.dto.UsuarioResponseDTO;
 import com.zonarefri.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,7 +15,9 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/registro")
-    public Usuario registrar(@RequestBody Usuario usuario) {
-        return usuarioService.registrar(usuario);
+    public ResponseEntity<UsuarioResponseDTO> registrar(@RequestBody UsuarioRegistroDTO registroDTO) {
+        UsuarioResponseDTO usuarioCreado = usuarioService.registrar(registroDTO);
+        return ResponseEntity.ok(usuarioCreado);
     }
 }
+

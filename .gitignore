@@ -1,0 +1,21 @@
+﻿# Archivos compilados
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Configuración IDE
+.idea/
+.vscode/
+*.iml
+.settings/
+.classpath
+.project
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
