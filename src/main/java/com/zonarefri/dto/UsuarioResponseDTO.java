@@ -12,5 +12,5 @@ public class UsuarioResponseDTO {
     private String email;
     private String rol;
     private LocalDateTime fechaRegistro;
-    // ¡NO incluye password! (esto es buena práctica siempre)
+   
 }
