@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Refri ❄️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img th:src="@{/img/logo-zonafri.png}" alt="Logo Zona Refri" class="nav-logo">
+                <span class="logo-text">Zona Refri</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#productos">Los Repuestos</a></li>
+                <li><a href="#contacto">¿Chateamos?</a></li>
+                <li><a href="#sobre-nosotros">Quiénes Somos</a></li>
+                <li><a href="#carrito">Mi Botín 🛒</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <img th:src="@{/img/logo-zonafri.png}" alt="Zona Refri Logo" class="main-logo-animado">
+            <h1>¡Tu heladera se merece una sonrisa! 😊</h1>
+            <p>En Berazategui no dejamos que nada se caliente. Repuestos con onda y la mejor atención de zona sur.</p>
+            <a href="#productos" class="cta-main">¡Ver Catálogo!</a>
+        </section>
+
+        <section id="productos" class="container">
+            <h2>Lo que tu electro necesita 👇</h2>
+            <div class="productos-grid">
+                <div class="producto-card" th:each="prod : ${productos}">
+                    <div class="emoji-dec">🚀</div>
+                    <h3 th:text="${prod.nombre}">Repuesto de Prueba</h3>
+                    <p th:text="${prod.descripcion}">Descripción técnica con buena onda.</p>
+                    <span class="precio" th:text="'$' + ${prod.precio}">$0.00</span>
+                    <button class="cta-btn">¡Lo quiero ya!</button>
+                </div>
+                
+                <div class="producto-card">
+                    <div class="emoji-dec">❄️</div>
+                    <h3>Termostato Mágico</h3>
+                    <p>Para que tu heladera no pare de enfriar.</p>
+                    <span class="precio">$15.500</span>
+                    <button class="cta-btn">¡Lo quiero ya!</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Hecho con ❤️ en Berazategui para toda la Zona Sur</p>
+            <p>&copy; 2026 Zona Refri - ¡Dale alegría a tu casa!</p>
+        </div>
+    </footer>
+
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
