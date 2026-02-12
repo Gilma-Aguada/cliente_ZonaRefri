@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
+@CrossOrigin(origins = "http://localhost:3000") // Permite solicitudes desde el frontend en React (puerto 3000)
 public class ProductoController {
 
     @Autowired

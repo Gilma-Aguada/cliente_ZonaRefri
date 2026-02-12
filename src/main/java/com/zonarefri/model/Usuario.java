@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Usuario {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,6 +34,8 @@ public class Usuario {
     @ToString.Exclude
     private String password;
 
+    // Es obligatorio (nullable = false)
+    @Column(nullable = false, length = 20)
     private String rol;
 
     @Column(name = "fecha_registro", updatable = false)
@@ -41,5 +44,9 @@ public class Usuario {
     @PrePersist
     protected void onCreate() {
         this.fechaRegistro = LocalDateTime.now();
+        // Si al crear el usuario nos olvidamos de ponerle rol, por defecto será CLIENTE
+        if (this.rol == null) {
+            this.rol = "CLIENTE";
+        }
     }
 }
