@@ -1,4 +1,5 @@
 import React from 'react'
+import logoRobot from './assets/logo-refri.jpeg'
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
               <div className="input-group shadow-sm" style={{ borderRadius: '15px', overflow: 'hidden', maxWidth: '750px', margin: '0 auto' }}>
                 <input type="text" className="form-control border-0 py-3 px-4" placeholder="¿Qué repuesto estás buscando hoy?" style={{ fontSize: '1.1rem' }} />
                 <button className="btn btn-primary px-4 border-0" style={{ backgroundColor: '#007bff' }}>
-                   <span style={{ fontSize: '1.4rem' }}>🔍</span>
+                    <span style={{ fontSize: '1.4rem' }}>🔍</span>
                 </button>
               </div>
             </div>
@@ -85,7 +86,7 @@ function App() {
               <div className="position-absolute top-50 start-50 translate-middle" style={{ width: '580px', height: '580px', backgroundColor: '#ffd32a', borderRadius: '50%', opacity: '0.9' }}></div>
               
               <img 
-                src="/logo-refri.jpeg" 
+                src={logoRobot} 
                 alt="Robot Zona Refri" 
                 className="position-relative shadow-lg"
                 style={{ 
