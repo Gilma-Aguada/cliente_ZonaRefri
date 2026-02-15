@@ -16,6 +16,10 @@ target/
 # Logs
 *.log
 
+# Node
+node_modules/
+package-lock.json
+
 # Sistema operativo
 .DS_Store
 Thumbs.db
