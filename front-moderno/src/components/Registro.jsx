@@ -7,8 +7,6 @@ const Registro = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Datos que espera tu Backend (UsuarioController)
         const nuevoUsuario = { nombre, email, password };
 
         try {
@@ -24,18 +22,44 @@ const Registro = () => {
                 alert("Error en el registro. Revisa el Backend.");
             }
         } catch (error) {
-            console.error("Error de conexión:", error);
+            alert("No se pudo conectar con el servidor. ¿Está el Backend prendido?");
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
-            <h2>Registro de Cliente</h2>
-            <input type="text" placeholder="Nombre" onChange={(e) => setNombre(e.target.value)} required />
-            <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} required />
-            <button type="submit">Crear Cuenta</button>
-        </form>
+        <div className="p-3">
+            <h3 className="mb-4" style={{ fontWeight: '700', color: '#00509d' }}>Crear Cuenta</h3>
+            <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+                <input 
+                    type="text" 
+                    className="form-control py-2" 
+                    placeholder="Tu nombre completo" 
+                    onChange={(e) => setNombre(e.target.value)} 
+                    required 
+                />
+                <input 
+                    type="email" 
+                    className="form-control py-2" 
+                    placeholder="Correo electrónico" 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    required 
+                />
+                <input 
+                    type="password" 
+                    className="form-control py-2" 
+                    placeholder="Contraseña segura" 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    required 
+                />
+                <button 
+                    type="submit" 
+                    className="btn btn-primary py-2 fw-bold" 
+                    style={{ backgroundColor: '#007bff', borderRadius: '10px' }}
+                >
+                    Registrarme
+                </button>
+            </form>
+        </div>
     );
 };
 
