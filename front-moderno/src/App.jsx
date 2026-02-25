@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import logoRobot from './assets/logo-refri.jpeg'
 import Registro from './components/Registro' 
 
 function App() {
+  const [productos, setProductos] = useState([]);
+  const [errorProductos, setErrorProductos] = useState(null);
+
+  useEffect(() => {
+    // trae el listado del backend cuando se monta el componente
+    fetch('http://localhost:8080/api/productos')
+      .then(resp => {
+        if (!resp.ok) throw new Error('Error al obtener productos');
+        return resp.json();
+      })
+      .then(data => setProductos(data))
+      .catch(err => {
+        console.error('Fetch productos:', err);
+        setErrorProductos(err.message);
+      });
+  }, []);
+
   return (
     <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "'Sora', sans-serif", overflowX: 'hidden' }}>
       
@@ -58,7 +75,7 @@ function App() {
                 </div>
                 <div className="col-md-6 text-center p-4">
                   <img 
-                    src="http://localhost:8080/images/productos/HeladeraElectrolux_frente.png.png" 
+                    src="http://localhost:8080/images/productos/HeladeraElectrolux_frente.png" 
                     className="img-fluid" 
                     style={{ maxHeight: '450px', filter: 'drop-shadow(5px 5px 15px rgba(0,0,0,0.3))' }} 
                     alt="Heladera" 
@@ -72,7 +89,7 @@ function App() {
               <div className="row align-items-center g-0" style={{ backgroundColor: '#ff851b', minHeight: '550px' }}>
                 <div className="col-md-6 text-center p-4">
                   <img 
-                    src="http://localhost:8080/images/productos/frezzerhorizontal_frente.png.png" 
+                    src="http://localhost:8080/images/productos/frezzerhorizontal_frente.png" 
                     className="img-fluid" 
                     style={{ maxHeight: '420px', filter: 'drop-shadow(5px 5px 15px rgba(0,0,0,0.3))' }} // Aumentado de 350px a 420px
                     alt="Freezer" 
@@ -149,6 +166,42 @@ function App() {
             <span className="carousel-control-next-icon"></span>
           </button>
 
+        </div>
+      </section>
+
+      {/* SECTION DE PRODUCTOS OBTENIDOS DEL BACKEND */}
+      <section className="container my-5">
+        <h2 className="mb-4 text-center" style={{ color: '#00509d' }}>Catálogo de Productos</h2>
+        {errorProductos && (
+          <div className="alert alert-danger" role="alert">
+            No se pudieron cargar los productos: {errorProductos}
+          </div>
+        )}
+        <div className="row g-4">
+          {productos.length === 0 && !errorProductos && (
+            <div className="col-12 text-center text-muted">Cargando productos...</div>
+          )}
+          {productos.map(p => (
+            <div key={p.id} className="col-sm-6 col-md-4 col-lg-3">
+              <div className="card h-100 shadow-sm">
+                <img
+                  src={
+                    p.imagenUrl && p.imagenUrl.startsWith('http')
+                      ? p.imagenUrl
+                      : `http://localhost:8080${p.imagenUrl}`
+                  }
+                  className="card-img-top"
+                  alt={p.nombre}
+                  style={{ objectFit: 'contain', height: '180px', padding: '10px' }}
+                />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title" style={{ fontSize: '1.1rem' }}>{p.nombre}</h5>
+                  <p className="card-text text-truncate" style={{ flex: '1' }}>{p.descripcion}</p>
+                  <div className="mt-2 fw-bold" style={{ color: '#007bff' }}>${p.precio}</div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
